@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+import sys
+import site
+
+# Add custom install path to sys.path
+site.addsitedir('/usr/lib/python3.12/site-packages')
+
+from pifi.pifi import main
+
+if __name__ == '__main__':
+    main()

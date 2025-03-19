@@ -15,6 +15,7 @@ crda_path = "/etc/default/crda"
 import os, sys
 import em
 import json, yaml
+from yaml import CLoader
 import uuid
 import re
 import ctypes
@@ -110,7 +111,7 @@ default_conf = {
 def get_conf(open=open):
     try:
         with open(conf_path) as conf_file:
-            conf = yaml.load(conf_file)
+            conf = yaml.load(conf_file, Loader=CLoader)
             if conf is None:
                 print("WARN /etc/pifi/pifi.conf is empty, using default configuration")
                 return default_conf

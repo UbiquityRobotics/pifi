@@ -1,0 +1,6 @@
+pifi.service etc/systemd/system/
+scripts/pifi usr/bin/
+scripts/pifi_startup usr/bin/
+default_ap.em etc/pifi/
+pifi.conf etc/pifi/
+

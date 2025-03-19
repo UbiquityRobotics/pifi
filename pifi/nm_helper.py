@@ -13,7 +13,7 @@ import NetworkManager
 # detects if that bug exists, and replaces the function with a version that returns a Generic
 # device type instead of crapping out.
 try:
-    NetworkManager.device_class(30)
+    NetworkManager.device_class(32)
 except KeyError:
 
     def monkey_patched_device_class(typ):

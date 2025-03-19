@@ -50,7 +50,9 @@ The recommended way to install is from debs. The apt source at https://packages.
 
 If that source is configured on your system, simply run `sudo apt install pifi`.
 
-To install from source, run `sudo pip3 install .` in the pifi directory after cloning this repo.
+It is recommended to generate your own deb when building from source. You can do it with `dpkg-buildpackage -us -uc -d` from within the root folder. And then install it with `sudo dpkg -i ../pifi_*.deb`.
+
+To install from source with pip, run `sudo pip3 install .` in the pifi directory after cloning this repo. But in this case you will need to install the pifi service manually.
 
 ## Dependencies
 Note: Don't worry about dependencies if you are installing from debs, they will be installed automatically.
@@ -191,3 +193,10 @@ xfinitywifi
 ```
 
 Notice that the SSIDs can be duplicated (there will be one entry per AP).
+
+## Troubleshooting
+
+### "set chanspec 0x100c fail, reason -52".
+
+This can get spammed on the console. If it bothers you, put this at the end of `/boot/firmware/cmdline.txt`:
+`brcmfmac.roamoff=1 brcmfmac.feature_disable=0x282000`

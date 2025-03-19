@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.12
+
 """
 pifi
 
@@ -22,8 +24,11 @@ import time
 import uuid
 import sys
 import socket
+import os
 
-import NetworkManager
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'vendor'))
+
+import NetworkManager  # Now loads your patched version
 
 import pifi.nm_helper as nm
 import pifi.var_io as var_io
@@ -31,6 +36,8 @@ import pifi.etc_io as etc_io
 import pifi.startup as startup
 from pifi.version import __version__
 
+import dbus.mainloop.glib
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
 def query_yes_no(question, default="no"):
     """Ask a yes/no question via raw_input() and return their answer.

@@ -1,8 +1,23 @@
-#! /usr/bin/make -f
-
-#export DH_VERBOSE=1
-export PYBUILD_NAME=pifi
-#export PYBUILD_INSTALL_ARGS='--install-lib=/usr/share/pifi/ --install-scripts=/usr/share/pifi/'
+#!/usr/bin/make -f
 
 %:
-	dh $@ --with systemd --with python3 --buildsystem=pybuild
+	dh $@ # --with python3
+
+override_dh_auto_clean:
+	rm -rf build dist .egg-info __pycache__
+
+override_dh_auto_configure:
+	# No-op to skip distutils/pybuild
+
+override_dh_auto_build:
+	. /home/ubuntu/pifi-venv/bin/activate && python setup.py build
+
+override_dh_auto_install:
+	. /home/ubuntu/pifi-venv/bin/activate && \
+	python setup.py install \
+	  --prefix=/usr \
+	  --root=$(CURDIR)/debian/pifi \
+	  --install-lib=/usr/lib/python3.12/site-packages
+	  
+override_dh_auto_test:
+	# Skipping tests (or add test runner here if needed)

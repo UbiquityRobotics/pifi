@@ -1,3 +1,9 @@
+pifi (0.11.0) noble; urgency=medium
+
+  * Adapting to Ubuntu 24
+
+ -- Matjaz Bostic <mb@ubiquityrobotics.com>  Wed, 26 Mar 2025 19:36:12 +0100
+
 pifi (0.10.0) xenial; urgency=medium
 
   * Support for setting country code through pifi
