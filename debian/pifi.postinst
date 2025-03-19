@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Reload systemd to recognize the new unit
+systemctl daemon-reload
+
+# Enable the service to run at boot
+systemctl enable pifi.service
+
+# Optional: start immediately
+systemctl start pifi.service
+
+exit 0

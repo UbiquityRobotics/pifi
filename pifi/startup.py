@@ -18,6 +18,9 @@ import pifi.var_io as var_io
 import pifi.etc_io as etc_io
 import pifi.leds as leds
 
+import dbus.mainloop.glib
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
 # LED Animation patterns (ms on, ms off)
 initializing_led = (100, 300)
 ap_led = (100, 1000)
@@ -107,7 +110,13 @@ def main():
     time.sleep(30)
     var_io.writeSeenSSIDs(nm.seenSSIDs([ClientModeDevice]))
 
-    if ClientModeDevice.State == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
+    # print("state:", ClientModeDevice.State)
+    active_conn = ClientModeDevice.SpecificDevice().ActiveConnection
+    ap_settings = etc_io.get_default_ap_conf(ApModeDevice.HwAddress)
+
+    ap_name = ap_settings["802-11-wireless"]["ssid"]
+
+    if ClientModeDevice.State == NetworkManager.NM_DEVICE_STATE_ACTIVATED and active_conn and active_conn.Type == "802-11-wireless" and active_conn.Id not in ["Pifi AP Mode", ap_name]:
         print(
             "Client Device currently connected to: %s"
             % ClientModeDevice.SpecificDevice().ActiveAccessPoint.Ssid

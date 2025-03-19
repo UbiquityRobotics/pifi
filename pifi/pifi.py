@@ -31,6 +31,8 @@ import pifi.etc_io as etc_io
 import pifi.startup as startup
 from pifi.version import __version__
 
+import dbus.mainloop.glib
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
 def query_yes_no(question, default="no"):
     """Ask a yes/no question via raw_input() and return their answer.
